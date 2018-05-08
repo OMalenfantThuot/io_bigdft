@@ -1,2 +1,7 @@
 # io_bigdft
-Librairie de fonctions et scripts python pour le projet graphène
+#Librairie de fonctions et scripts python pour le projet graphène
+
+#Dans big-k-points:
+#Script pour générer les coordonnées des grilles de points k: generate_grid.py
+#Script pour produire les représentation des ZdB de supercellules dans la
+#ZdB de la cellule primitive, avec la projection des points k : grille_bigdft.py

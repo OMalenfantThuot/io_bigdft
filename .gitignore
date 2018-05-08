@@ -1,1 +1,6 @@
 *.data
+*.png
+.DS_STORE
+.ipynb_checkpoints/
+*.jpg
+*.dat
