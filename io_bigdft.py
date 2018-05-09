@@ -48,8 +48,8 @@ def first_BZ_hex(x,y,b):
         if y >= 0: theta = math.pi/2
         if y < 0: theta = (3./2)*math.pi
     theta = (theta % (math.pi/3)) - math.pi/6
-    l = np.around(np.sqrt(x**2+y**2), decimals = 10)
-    lim = np.around(b/(2.*math.cos(theta)), decimals = 10)
+    l = np.around(np.sqrt(x**2+y**2), decimals = 7)
+    lim = np.around(b/(2.*math.cos(theta)), decimals = 7)
     #Retourne un permier true si le point est à l'intérieur
     #Le second est seulement vrai si le point est exactement à la frontière
     if l == lim:
