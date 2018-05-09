@@ -4,10 +4,12 @@ import math as m
 import numpy as np
 import io_bigdft as io
 
-#Taille de la supercellule
+#Taille de la supercellule entrée par l'utilisateur
 x = int(input('Taille de la supercellule en x:\n'))
 z = int(input('Taille de la supercellule en z:\n'))
 
+#Définition des longueurs pour la cellule primitive
+# et la supercellule
 d = 1.42
 a_uni = d*np.sqrt(3)
 a_big_base_x = a_uni
@@ -21,25 +23,33 @@ bz = b_big_base_z/z
 b1k = []
 b2k = []
 
+#Nom du fichier contenant les coordonnées des points k
+#À générer avec le script generate_grid.py
 f = open(input('Nom du fichier contenant la grille de points k:\n'),'r')
 
+#Lecture des points k et conversion en array
 for line in f:
     l = line.split()
     b1k.append(float(l[0]))
     b2k.append(float(l[2]))
-
 b1k = np.array(b1k)
 b2k = np.array(b2k)
 
-
+#Conversion en coordonnées cartésiennes
 kx = b1k*bx
 kz = b2k*bz
 
+#Liste qui contiendra les points à l'intérieur de
+#la première ZdB
 final = [[] for i in range(len(kx))]
+onlim = 0
 
+#Translations possibles entre les points k
 trans_x = [bx, 0, -bx, 0]
 trans_z = [0, -bz, 0, bz]
 
+#Trouver tous les points à l'intérieur et sur la limite
+#de la première ZdB
 for i in range(len(kx)):
     final[i].append([round(kx[i],10),round(kz[i],10)])
     j = 0
@@ -47,25 +57,32 @@ for i in range(len(kx)):
         for k in range(len(trans_x)):
             point = [round(final[i][j][0]+trans_x[k],10),round(final[i][j][1]+trans_z[k],10)]
             if point not in final[i]:
-                if io.first_BZ_hex(point[0],point[1],b_uni):
+                inside = io.first_BZ_hex(point[0],point[1],b_uni)
+                if inside[0]:
                     final[i].append(point)
+                    if inside[1]:
+                        onlim += 1
         j += 1
 
 total = 0
+
+#Nombre de points par Zdb
 for i in range(len(final)):
     total += len(final[i])
+total = total - onlim/2
 
+#Affichage du résultat
 print('La ZdB primitive est discrétisée sur ',str(total),' points.')
 
+#Liste pour le graphique
 pointx=[]
 pointz=[]
-
 for i in range(len(final)):
     for el in final[i]:
         pointx.append(el[0])
         pointz.append(el[1])
 
-
+#Affichage du graphique
 plt.figure(1,figsize=(9,9))       
 io.plot_hex(b_uni,color='k',label='ZdB primitive')
 io.plot_rec(bx,bz,color='g',label='ZdB pour cellule 9x5 (180 atomes)')

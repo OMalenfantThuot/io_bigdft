@@ -4,6 +4,9 @@ import matplotlib.pyplot as plt
 
 
 def read_ascii(filename):
+#Fonction pour lire les fichiers positions .ascii de BigDFT
+#data_pos: contient les positions des atomes
+#data_at: contient les types atomiques
     data_pos = []
     data_at = []
     f = open(filename,'r')
@@ -18,34 +21,43 @@ def read_ascii(filename):
     
     
 
-def first_BZ_rec(kx,ky,bx,by):
-#kx,ky : coordonnées du point à  vérifier
+def first_BZ_rec(x,y,bx,by):
+#Cette fonction vérifie si un point est à l'intérieur de
+#la première zone de brillouin rectangulaire.
+#x,y : coordonnées du point à  vérifier
 #bx,by : norme des vecteurs bx et by
-    if (-bx/2 < kx <= bx/2) & (-by/2 < ky <= by/2):
+    if (-bx/2 < x <= bx/2) & (-by/2 < y <= by/2):
         return True
     else:
         return False
         
 
-def first_BZ_hex(kx,ky,b):
-#kx,ky : coordonnées du point à  vérifier
+def first_BZ_hex(x,y,b):
+#Cette fonction vérifie si un point est à l'intérieur de
+#la première zone de brillouin hexagonale définie par les
+#vecteurs réciproques de norme b.
+#x,y : coordonnées du point à  vérifier
 #b : norme des vecteurs b
-    if (kx > 0) & (ky >= 0):
-        theta = math.atan(ky/kx)
-    elif (kx < 0):
-        theta = math.pi + math.atan(ky/kx)
-    elif (kx > 0) & (ky < 0):
-        theta = 2*math.pi + math.atan(ky/kx)
-    elif (kx == 0):
-        if ky >= 0: theta = math.pi/2
-        if ky < 0: theta = (3/2)*math.pi
+    if (x > 0) & (y >= 0):
+        theta = math.atan(y/x)
+    elif (x < 0):
+        theta = math.pi + math.atan(y/x)
+    elif (x > 0) & (y < 0):
+        theta = 2*math.pi + math.atan(y/x)
+    elif (x == 0):
+        if y >= 0: theta = math.pi/2
+        if y < 0: theta = (3./2)*math.pi
     theta = (theta % (math.pi/3)) - math.pi/6
-    l = np.sqrt(kx**2+ky**2)
-    lim = b/(2.*math.cos(theta))+0.001
-    if l <= lim:
-        return True
+    l = np.around(np.sqrt(x**2+y**2), decimals = 10)
+    lim = np.around(b/(2.*math.cos(theta)), decimals = 10)
+    #Retourne un permier true si le point est à l'intérieur
+    #Le second est seulement vrai si le point est exactement à la frontière
+    if l == lim:
+        return True, True
+    if l < lim:
+        return True, False
     if l > lim:
-        return False
+        return False, False
 
 def plot_hex(b,color='k',label=''):
     r = b/math.sqrt(3)
