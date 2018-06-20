@@ -1,15 +1,17 @@
+# -*- coding: utf-8 -*-
+
 #Script pour translater les fichiers positions .ascii
 
 import numpy as np
 import io_bigdft as io
-import sys
+#import sys
 
-infile = sys.argv[1]
+infile = str(input('Entrer le nom du fichier translater:\n'))
 outfile = 'out_'+infile
 data_pos, data_at = io.read_ascii(infile)
 
-delx = float(sys.argv[2])
-delz = float(sys.argv[3])
+delx = float(input('Translation en x (unités atomiques):\n'))
+delz = float(input('Translation en z (unités atomiques):\n'))
 
 data_pos[:,0] += delx
 data_pos[:,2] += delz

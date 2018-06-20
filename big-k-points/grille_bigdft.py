@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import sys
 import matplotlib.pyplot as plt
 import math as m
@@ -72,7 +74,7 @@ for i in range(len(final)):
 total = total - onlim/2
 
 #Affichage du résultat
-print('La ZdB primitive est discrétisée sur ',str(total),' points.')
+print('La ZdB primitive est discrétisée sur ',str(int(total)),' points.')
 
 #Liste pour le graphique
 pointx=[]
@@ -86,7 +88,7 @@ for i in range(len(final)):
 plt.figure(1,figsize=(9,9))       
 io.plot_hex(b_uni,color='k',label='ZdB primitive')
 io.plot_rec(bx,bz,color='g',label='ZdB pour cellule 9x5 (180 atomes)')
-plt.plot(pointx,pointz,'ob')
+plt.plot(pointx,pointz,'ob',markersize=2)
 plt.plot(0,0,'kx',markersize=10)
 plt.plot(1/3*b_uni*np.cos(np.pi/6),1/3*b_uni+1/3*b_uni*np.sin(np.pi/6),'kx',markersize=10)
 plt.text(-0.1,-0.1,'$\Gamma$',size='large')

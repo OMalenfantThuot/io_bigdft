@@ -5,8 +5,6 @@
 import os
 
 names = os.listdir(os.getcwd())
-#print(names)
-#print(type(names))
 
 for name in names:
     if name.endswith(".in.ascii"):
