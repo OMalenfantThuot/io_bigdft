@@ -1,4 +1,7 @@
-#lib/io\_bigdft
+# io\_bigdft
+> Scripts python pour la production de figures
+
+#lib io\_bigdft : DEPRECATED (functions\_briaree)
 Librairie de fonctions et scripts python pour le projet graphène
 Il faut ajouter lib/ au PYTHONPATH pour pouvoir appeler les fonctions.
 
@@ -8,7 +11,11 @@ Script pour produire les représentation des ZdB de supercellules dans la
 ZdB de la cellule primitive, avec la projection des points k : grille\_bigdft.py
 
 #Dans fonctions/
-#grandes\_cell/ :
+#grandes\_cell/ : DEPRECATED (functions\_briaree)
 Script pour créer des cellules de graphène plus grandes à partir d'un centre relaxé
-#translation/:
+#translation/: DEPRECATED (functions\_briaree)
 Script pour translater des cellules
+
+## Requirements
+
+Python3, numpy, scipy
