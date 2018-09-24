@@ -19,9 +19,7 @@ reaction = [N_adsorbe, N_in +3, N_in, C_adsorbe + N_graphitic]
 #intervalles de la réaction
 time = np.linspace(1.,4, 4)
 
-
-fig = plt.figure(figsize=[16,11])
-ax = fig.add_subplot(111)
+fig,ax = plt.subplots(figsize=[16,11])
 
 ax.plot(time, reaction,'o')
 for i in range(3):
@@ -29,16 +27,16 @@ for i in range(3):
     ax.plot(delta, sin_interpolate(reaction[i], reaction[i+1], delta))
 
 #Set axis
-plt.axis([0.5, 4.5, np.min(reaction) - 0.5, np.max(reaction) + 0.5])
-#plt.axis('off')
-plt.xticks([])
-plt.yticks([])
+ax.set_xlim(0.5, 4.5)
+ax.set_ylim(np.min(reaction) - 0.5, np.max(reaction) + 0.5)
+ax.xaxis.set_ticks([])
+ax.yaxis.set_ticks([])
 ax.xaxis.set_ticks_position('none')
 ax.yaxis.set_ticks_position('none')
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
-plt.xlabel('Time',fontsize=30)
-plt.ylabel('Energy',fontsize=30)
+ax.set_xlabel('Time',fontsize=30)
+ax.set_ylabel('Energy',fontsize=30)
 
 #Fig values
 xmin, xmax = ax.get_xlim()
@@ -65,5 +63,7 @@ ax.arrow(xmin, ymin, 0, ymax-ymin, fc='k', ec='k', lw = lw,
 
 for i,ener in enumerate(reaction):
     ax.plot([time[i] - 0.25, time[i] + 0.25], [ener, ener], 'k')
-    ax.text(time[i] + 0.3, ener, '{:4.2f} eV'.format(ener), fontsize = 20)
+    ax.text(time[i] - 0.1 , ener-0.3 , '{:4.2f} eV'.format(ener), fontsize = 20)
+
+fig.tight_layout()
 plt.show()
