@@ -1,12 +1,7 @@
+import functions_briaree as fbr
 import matplotlib.pyplot as plt
+import matplotlib.patches as patches
 import numpy as np
-
-def sin_interpolate(ener1, ener2, time):
-    a = (ener2  - ener1)/2
-    h = (time[-1] + time[0])/2
-    b = np.pi / (time[-1] - time[0])
-    c = (ener1 + ener2)/2
-    return a * np.sin(b * (time - h)) + c 
 
 #Valeurs calculées
 N_graphitic = 0.89
@@ -24,7 +19,8 @@ fig,ax = plt.subplots(figsize=[16,11])
 ax.plot(time, reaction,'o')
 for i in range(3):
     delta = np.linspace(i+1, i+2, 100)
-    ax.plot(delta, sin_interpolate(reaction[i], reaction[i+1], delta))
+    ax.plot(delta, fbr.sin_interpolate(reaction[i], reaction[i+1], delta))
+
 
 #Set axis
 ax.set_xlim(0.5, 4.5)
@@ -65,5 +61,11 @@ for i,ener in enumerate(reaction):
     ax.plot([time[i] - 0.25, time[i] + 0.25], [ener, ener], 'k')
     ax.text(time[i] - 0.1 , ener-0.3 , '{:4.2f} eV'.format(ener), fontsize = 20)
 
-fig.tight_layout()
+#patch = patches.Ellipse((time[1], reaction[1]), 0.6, 2, transform=ax.transData)
+#image = plt.imread('questionmark.png')
+#im = ax.imshow(image)
+#im.set_clip_path(patch)
+#ax.add_artist(patch)
+
+#fig.tight_layout()
 plt.show()
