@@ -4,26 +4,33 @@ import matplotlib.patches as patches
 import numpy as np
 
 #Valeurs calculées
-N_graphitic = 0.89
-N_adsorbe = 4.37
-C_adsorbe = 6.52
-N_in = 7.22
+E_start = 6
+E_N_adsorbe = 4.5
+E_N_diffusion = 5.6
+E_reac = 8.3
+E_doped_init = 6.5
+E_doped_diffusion = 7.3
+E_final = 6.2
 
-reaction = [N_adsorbe, N_in +3, N_in, C_adsorbe + N_graphitic]
+reaction = [E_start, E_N_adsorbe, E_N_diffusion, E_N_adsorbe, E_reac, E_doped_init,
+            E_doped_diffusion, E_final]
 
 #intervalles de la réaction
-time = np.linspace(1.,4, 4)
+time = np.linspace(1.,len(reaction), len(reaction))
+
 
 fig,ax = plt.subplots(figsize=[16,11])
 
+ax.set_facecolor('xkcd:silver')
 ax.plot(time, reaction,'o')
-for i in range(3):
+color = ['k','r','k','r','k','r','k']
+for i in range(len(reaction)-1):
     delta = np.linspace(i+1, i+2, 100)
-    ax.plot(delta, fbr.sin_interpolate(reaction[i], reaction[i+1], delta))
+    ax.plot(delta, fbr.sin_interpolate(reaction[i], reaction[i+1], delta), color=color[i])
 
 
 #Set axis
-ax.set_xlim(0.5, 4.5)
+ax.set_xlim(0.5, len(reaction)+0.5)
 ax.set_ylim(np.min(reaction) - 0.5, np.max(reaction) + 0.5)
 ax.xaxis.set_ticks([])
 ax.yaxis.set_ticks([])
@@ -57,15 +64,15 @@ ax.arrow(xmin, ymin, 0, ymax-ymin, fc='k', ec='k', lw = lw,
          head_width=yhw, head_length=yhl, overhang = ohg,
          length_includes_head= True, clip_on = False)
 
+xoffset = [-0.4, -0.4, -0.55, -0.4, -0.7, -0.4, -0.55, -0.4]
+yoffset = [0.1,-0.24,0.1,-0.24,0.1,-0.24,0.1,-0.24]
+texts = ['Initial state', 'Adsorbed N', 'N diffusion TS', 'Adsorbed N',
+         'Functionalisation TS', 'Adsorbed C', 'C diffusion TS', 'Final state']
+
 for i,ener in enumerate(reaction):
     ax.plot([time[i] - 0.25, time[i] + 0.25], [ener, ener], 'k')
-    ax.text(time[i] - 0.1 , ener-0.3 , '{:4.2f} eV'.format(ener), fontsize = 20)
+    ax.text(time[i] + xoffset[i] , ener + yoffset[i] , texts[i], fontsize = 20)
 
-#patch = patches.Ellipse((time[1], reaction[1]), 0.6, 2, transform=ax.transData)
-#image = plt.imread('questionmark.png')
-#im = ax.imshow(image)
-#im.set_clip_path(patch)
-#ax.add_artist(patch)
-
-#fig.tight_layout()
-plt.show()
+fig.tight_layout()
+plt.savefig('reaction.png')
+#plt.show()
