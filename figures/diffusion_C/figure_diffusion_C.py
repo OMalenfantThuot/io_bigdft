@@ -41,13 +41,13 @@ imagebox2.image.axes = ax
 imagebox3.image.axes = ax
 
 ab1 = AnnotationBbox(imagebox1, [distances[0], reaction[0]],
-                    xybox = [0.17 * distances[-1], 0.7],
+                    xybox = [0.17 * distances[-1], 0.62],
                     arrowprops=dict(arrowstyle = "->"))
 ab2 = AnnotationBbox(imagebox2, [distances[mid_i], reaction[mid_i]],
-                    xybox = [0.5 * distances[-1], 0.7],
+                    xybox = [0.5 * distances[-1], 0.20],
                     arrowprops=dict(arrowstyle = "->"))
 ab3 = AnnotationBbox(imagebox3, [distances[-1], reaction[-1]],
-                    xybox = [0.83 * distances[-1],0.7],
+                    xybox = [0.83 * distances[-1],0.62],
                     arrowprops=dict(arrowstyle = "->"))
 
 ax.add_artist(ab1)
@@ -55,5 +55,5 @@ ax.add_artist(ab2)
 ax.add_artist(ab3)
 
 #Show or save figure
-#plt.show()
-plt.savefig('diffusion_C', dpi = 300)
+plt.show()
+#plt.savefig('diffusion_C', dpi = 300)
