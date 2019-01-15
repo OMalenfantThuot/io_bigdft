@@ -8,7 +8,6 @@ data = np.loadtxt('neb.it0006.dat')
 distances = np.loadtxt('out_data.txt') * 0.529177
 
 reaction = data[:,1]
-time = data[:,0]
 
 fig,ax = plt.subplots(figsize=[16,11])
 
