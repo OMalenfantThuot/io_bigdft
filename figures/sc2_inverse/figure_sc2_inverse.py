@@ -4,35 +4,47 @@ from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 import numpy as np
 from PIL import Image
 
-data = np.loadtxt('neb.it0012.dat')
-distances = np.loadtxt('out_data.txt') * 0.529177
+data1 = np.loadtxt('neb.it0012.dat')
+data2 = np.loadtxt('neb.it0007.dat')
+distances1 = np.loadtxt('out_data1.txt') * 0.529177
+distances2 = np.loadtxt('out_data2.txt') * 0.529177 + distances1[-1]
 
-reaction = data[:,1]
+reaction1 = data1[:,1]
+reaction2 = data2[:,1] + reaction1[-1]
 
-fig,ax = plt.subplots(figsize=[16,11])
+fig,ax = plt.subplots(figsize=[17,10])
 
 #Set axis
-ax.set_xlim(distances[0], distances[-1])
-ax.set_ylim(0, np.max(reaction) + 0.6)
-ax.set_xlabel('Nitrogen Displacement($\AA$)',fontsize=30)
+ax.set_xlim(distances1[0], distances2[-1])
+ax.set_ylim(0, np.max(reaction1) + 0.6)
+ax.set_xlabel('Nitrogen Displacement($\AA$)', fontsize=30)
 ax.set_ylabel('Energy (ev)',fontsize=30)
 
-ax.xaxis.set_ticks(np.arange(distances[0], distances[-1], 0.1))
+ax.xaxis.set_ticks(np.arange(distances1[0], distances2[-1], 0.2))
 
-ax.plot(distances, reaction,'-o')
+ax.plot(distances1, reaction1,'-ok', clip_on=False)
+ax.plot(distances2, reaction2,'-ok', clip_on=False)
 ax.grid(True)
+ax.set_axisbelow(True)
 
-max_i = np.argmax(reaction)
+max1 = np.argmax(reaction1)
+max2 = np.argmax(reaction2)
 
-ax.plot([distances[0], distances[max_i]], [reaction[max_i], reaction[max_i]], '--k')
-ax.plot([distances[max_i], distances[-1]], [reaction[-1], reaction[-1]], '--k')
-ax.arrow(distances[max_i], reaction[-1], 0, reaction[max_i]-reaction[-1]-0.01, width=0.005, facecolor='k',
+h = (reaction2[0]+reaction2[max2])/2
+
+ax.plot([distances1[0], distances1[max1]], [reaction1[max1], reaction1[max1]], '--k')
+ax.plot([distances1[-1], distances2[max2]], [reaction1[-1], reaction1[-1]], '--k')
+ax.arrow(distances1[max1], reaction1[-1], 0, reaction1[max1]-reaction1[-1]-0.01, width=0.005, facecolor='k',
         length_includes_head=True, head_width=0.025, head_length = 0.1)
-ax.arrow(distances[max_i], reaction[-1], 0, -reaction[-1]+0.01, width=0.005, facecolor='k',
+ax.arrow(distances1[max1], reaction1[-1], 0, -reaction1[-1]+0.01, width=0.005, facecolor='k',
+        length_includes_head=True, head_width=0.025, head_length = 0.1)
+ax.arrow(distances2[max2], h, 0, reaction2[max2]-h-0.01, width=0.005, facecolor='k',
+        length_includes_head=True, head_width=0.025, head_length = 0.1)
+ax.arrow(distances2[max2], h, 0, -(reaction2[max2]-h-0.01), width=0.005, facecolor='k',
         length_includes_head=True, head_width=0.025, head_length = 0.1)
 
-
-#ax.text(distances[max_i] + 0.12, reaction[max_i]-0.008 , '{:4.2f} eV'.format(reaction[max_i]), fontsize = 20)
+ax.text(distances1[max1] - 0.30, reaction1[max1]/2, '{:4.2f} eV'.format(reaction1[max1]), fontsize = 20)
+ax.text(distances2[max2] - 0.08, reaction2[0]-0.2, '{:4.2f} eV'.format(reaction2[max2]-reaction2[0]), fontsize = 20)
 
 #image1 = Image.open('posinp1.jpg')
 #image2 = Image.open('posinp9.jpg')
@@ -47,21 +59,19 @@ ax.arrow(distances[max_i], reaction[-1], 0, -reaction[-1]+0.01, width=0.005, fac
 #imagebox2.image.axes = ax
 #imagebox3.image.axes = ax
 #
-#ab1 = AnnotationBbox(imagebox1, [distances[0], reaction[0]],
-#                    xybox = [0.13 * distances[-1], 0.9],
+#ab1 = AnnotationBbox(imagebox1, [distances1[0], reaction1[0]],
+#                    xybox = [0.13 * distances1[-1], 0.9],
 #                    arrowprops=dict(arrowstyle = "->"))
-#ab2 = AnnotationBbox(imagebox2, [distances[8], reaction[9]],
-#                    xybox = [0.5 * distances[-1], 0.4],
+#ab2 = AnnotationBbox(imagebox2, [distances1[8], reaction1[9]],
+#                    xybox = [0.5 * distances1[-1], 0.4],
 #                    arrowprops=dict(arrowstyle = "->"))
-#ab3 = AnnotationBbox(imagebox3, [distances[-1], reaction[-1]],
-#                    xybox = [0.87 * distances[-1],0.9],
+#ab3 = AnnotationBbox(imagebox3, [distances1[-1], reaction1[-1]],
+#                    xybox = [0.87 * distances1[-1],0.9],
 #                    arrowprops=dict(arrowstyle = "->"))
 #
 #ax.add_artist(ab1)
 #ax.add_artist(ab2)
 #ax.add_artist(ab3)
-
-fig.tight_layout()
 
 #Show or save figure
 plt.show()
