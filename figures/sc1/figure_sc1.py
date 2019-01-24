@@ -9,7 +9,7 @@ distances = np.loadtxt('out_data.txt') * 0.529177
 
 reaction = data[:,1]
 
-fig,ax = plt.subplots(figsize=[16,11])
+fig,ax = plt.subplots(figsize=[14,11])
 
 #Set axis
 ax.set_xlim(distances[0], distances[-1])
@@ -37,7 +37,7 @@ ax.arrow(distances[max_i], h, 0, -(reaction[max_i]-h-0.01), width=0.005, facecol
 
 plt.subplots_adjust(top=0.95)
 
-#ax.text(distances[max_i] + 0.12, reaction[max_i]-0.008 , '{:4.2f} eV'.format(reaction[max_i]), fontsize = 20)
+ax.text(distances[max_i] - 0.12, reaction[min_i]-0.5 , '{:4.2f} eV'.format(reaction[max_i]-reaction[min_i]), fontsize = 20)
 
 image1 = Image.open('posinp1.jpg')
 image2 = Image.open('posinp5.jpg')
@@ -56,16 +56,16 @@ imagebox3.image.axes = ax
 imagebox4.image.axes = ax
 
 ab1 = AnnotationBbox(imagebox1, [distances[0], reaction[0]],
-                    xybox = [0.15 * distances[-1], -4],
+                    xybox = [0.17 * distances[-1], -4],
                     arrowprops=dict(arrowstyle = "->"))
 ab2 = AnnotationBbox(imagebox2, [distances[4], reaction[4]],
-                    xybox = [0.5 * distances[-1], -4],
+                    xybox = [0.48 * distances[-1], -4],
                     arrowprops=dict(arrowstyle = "->"))
 ab3 = AnnotationBbox(imagebox3, [distances[11], reaction[11]],
-                    xybox = [0.87 * distances[-1], 0.2],
+                    xybox = [0.75 * distances[-1], 0.6],
                     arrowprops=dict(arrowstyle = "->"))
 ab4 = AnnotationBbox(imagebox4, [distances[-1], reaction[-1]],
-                    xybox = [0.87 * distances[-1], -3.3],
+                    xybox = [0.87 * distances[-1], -2.8],
                     arrowprops=dict(arrowstyle = "->"))
 
 ax.add_artist(ab1)
