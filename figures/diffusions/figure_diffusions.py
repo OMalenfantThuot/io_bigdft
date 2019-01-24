@@ -16,15 +16,15 @@ fig,ax = plt.subplots(figsize=[14,11])
 
 #Set axis
 ax.set_xlim(distancesN[0], distancesN[-1])
-ax.set_ylim(np.min(reactionN), np.max(reactionN) + 0.1)
+ax.set_ylim(np.min(reactionN), np.max(reactionN) + 0.15)
 ax.set_xlabel('Atom Displacement($\AA$)',fontsize=30)
 ax.set_ylabel('Energy (ev)',fontsize=30)
 
 ax.xaxis.set_ticks(np.arange(distancesN[0], distancesN[-1], 0.1))
 ax.tick_params(labelsize=20)
 
-ax.plot(distancesN, reactionN,'-o',color='g')
-ax.plot(distancesC, reactionC,'-o',color='k')
+ax.plot(distancesN, reactionN,'-o',color='g', clip_on=False)
+ax.plot(distancesC, reactionC,'-o',color='k', clip_on=False)
 ax.grid(True)
 ax.set_axisbelow(True)
 
@@ -44,29 +44,32 @@ ax.arrow(distancesN[maxN], reactionN[maxN]/2, 0, reactionN[maxN]/2-0.01, width=0
 ax.arrow(distancesN[maxN], reactionN[maxN]/2, 0, -reactionN[maxN]/2+0.01, width=0.003, facecolor='g',
         edgecolor = 'g', length_includes_head=True, head_width=0.02, head_length = 0.08)
 
+ax.text(distancesC[maxC] - 0.15, reactionC[maxC]*0.45, '{:4.2f} eV'.format(reactionC[maxC]), fontsize = 20)
+ax.text(distancesN[maxN] - 0.15, reactionN[maxN]*0.6, '{:4.2f} eV'.format(reactionN[maxN]), fontsize = 20)
+
 plt.subplots_adjust(top=0.75)
 
-C1 = Image.open('C1.jpg')
-C2 = Image.open('C9.jpg')
-C3 = Image.open('C17.jpg')
+N1 = Image.open('N1.jpg')
+N2 = Image.open('N11.jpg')
+N3 = Image.open('N17.jpg')
 
-zoom = 0.16
-imagebox1 = OffsetImage(C1, zoom = zoom)
-imagebox2 = OffsetImage(C2, zoom = zoom)
-imagebox3 = OffsetImage(C3, zoom = zoom)
+zoom = 0.28
+imagebox1 = OffsetImage(N1, zoom = zoom)
+imagebox2 = OffsetImage(N2, zoom = zoom)
+imagebox3 = OffsetImage(N3, zoom = zoom)
 
 imagebox1.image.axes = ax
 imagebox2.image.axes = ax
 imagebox3.image.axes = ax
 
-ab1 = AnnotationBbox(imagebox1, [distancesC[0], reactionC[0]],
-                    xybox = [0.17 * distancesC[-1], 1.22],
+ab1 = AnnotationBbox(imagebox1, [distancesN[0], reactionN[0]],
+                    xybox = [0.17 * distancesC[-1], 1.27],
                     arrowprops=dict(arrowstyle = "->"))
-ab2 = AnnotationBbox(imagebox2, [distancesC[maxC], reactionC[maxC]],
-                    xybox = [0.5 * distancesC[-1], 1.22],
+ab2 = AnnotationBbox(imagebox2, [distancesN[maxN], reactionN[maxN]],
+                    xybox = [0.5 * distancesC[-1], 1.27],
                     arrowprops=dict(arrowstyle = "->"))
-ab3 = AnnotationBbox(imagebox3, [distancesC[-1], reactionC[-1]],
-                    xybox = [0.83 * distancesC[-1], 1.22],
+ab3 = AnnotationBbox(imagebox3, [distancesN[-1], reactionN[-1]],
+                    xybox = [0.83 * distancesC[-1], 1.27],
                     arrowprops=dict(arrowstyle = "->"))
 
 ax.add_artist(ab1)
@@ -77,4 +80,4 @@ ax.add_artist(ab3)
 
 #Show or save figure
 #plt.show()
-plt.savefig('diffusion_C', dpi = 300)
+plt.savefig('diffusions', dpi = 300)
