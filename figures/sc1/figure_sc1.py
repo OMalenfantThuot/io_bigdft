@@ -40,11 +40,11 @@ plt.subplots_adjust(top=0.95)
 ax.text(distances[max_i] - 0.12, reaction[min_i]-0.5 , '{:4.2f} eV'.format(reaction[max_i]-reaction[min_i]), fontsize = 20)
 
 image1 = Image.open('posinp1.jpg')
-image2 = Image.open('posinp5.jpg')
-image3 = Image.open('posinp12.jpg')
+image2 = Image.open('posinp6.jpg')
+image3 = Image.open('posinp10.jpg')
 image4 = Image.open('posinp17.jpg')
 
-zoom = 0.26
+zoom = 0.21
 imagebox1 = OffsetImage(image1, zoom = zoom)
 imagebox2 = OffsetImage(image2, zoom = zoom)
 imagebox3 = OffsetImage(image3, zoom = zoom)
@@ -58,10 +58,10 @@ imagebox4.image.axes = ax
 ab1 = AnnotationBbox(imagebox1, [distances[0], reaction[0]],
                     xybox = [0.17 * distances[-1], -4],
                     arrowprops=dict(arrowstyle = "->"))
-ab2 = AnnotationBbox(imagebox2, [distances[4], reaction[4]],
+ab2 = AnnotationBbox(imagebox2, [distances[5], reaction[5]],
                     xybox = [0.48 * distances[-1], -4],
                     arrowprops=dict(arrowstyle = "->"))
-ab3 = AnnotationBbox(imagebox3, [distances[11], reaction[11]],
+ab3 = AnnotationBbox(imagebox3, [distances[9], reaction[9]],
                     xybox = [0.75 * distances[-1], 0.6],
                     arrowprops=dict(arrowstyle = "->"))
 ab4 = AnnotationBbox(imagebox4, [distances[-1], reaction[-1]],
