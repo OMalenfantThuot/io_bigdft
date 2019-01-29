@@ -4,10 +4,10 @@ from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 import numpy as np
 from PIL import Image
 
-data = np.loadtxt('neb.it0005.dat')
+data = np.loadtxt('neb.it0005_mod.dat')
 distances = np.loadtxt('out_data.txt') * 0.529177
 
-reaction = data[:,1]
+reaction = data[:,1]+data[0,1]
 
 fig,ax = plt.subplots(figsize=[14,11])
 
@@ -76,5 +76,5 @@ ax.add_artist(ab4)
 #fig.tight_layout()
 
 #Show or save figure
-plt.show()
-#plt.savefig('scenario_1', dpi = 300)
+#plt.show()
+plt.savefig('scenario_1', dpi = 300)
