@@ -1,8 +1,9 @@
 # io\_bigdft
 > Scripts python pour la production de figures
 
-.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
-    :target: https://github.com/ambv/black
+<p align="center">
+<a href="https://github.com/ambv/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
+</p>
 
 ### lib io\_bigdft : DEPRECATED (functions\_briaree)
 
