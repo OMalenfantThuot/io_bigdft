@@ -95,24 +95,26 @@ for i in range(len(final)):
 
 # Affichage du graphique
 plt.figure(1, figsize=(9, 9))
-fbr.plot_hex(b_uni, color="k", label="ZdB primitive")
-fbr.plot_rec(bx, bz, color="g", label="ZdB pour cellule 9x5 (180 atomes)")
-plt.plot(pointx, pointz, "ob", markersize=2)
-plt.plot(0, 0, "kx", markersize=10)
+fbr.plot_hex(b_uni, color="r", label="Primitive FBZ")
+fbr.plot_rec(bx, bz, color="g", label="BZ for 9x6 supercell (180 atoms)")
+plt.plot(pointx, pointz, "ob", markersize=3)
+plt.plot(0, 0, "kx", markersize=14)
 plt.plot(
     1 / 3 * b_uni * np.cos(np.pi / 6),
     1 / 3 * b_uni + 1 / 3 * b_uni * np.sin(np.pi / 6),
     "kx",
-    markersize=10,
+    markersize=14,
 )
-plt.text(-0.1, -0.1, "$\Gamma$", size="large")
+plt.text(-0.13, -0.13, "$\Gamma$", fontsize=17)
 plt.text(
-    1 / 3 * b_uni * np.cos(np.pi / 6) - 0.1,
-    1 / 3 * b_uni + 1 / 3 * b_uni * np.sin(np.pi / 6) - 0.1,
+    1 / 3 * b_uni * np.cos(np.pi / 6) - 0.15,
+    1 / 3 * b_uni + 1 / 3 * b_uni * np.sin(np.pi / 6) - 0.15,
     "K",
-    size="large",
+    fontsize=17,
 )
-plt.legend(bbox_to_anchor=(1,1),prop={'size':20})
-plt.xlabel("kx ($\mathrm{\AA{}}^{-1}$)")
-plt.ylabel("kz ($\mathrm{\AA{}}^{-1}$)")
-plt.show()
+plt.legend(loc='center', bbox_to_anchor=(0.5,1), prop={'size':20}, facecolor='w')
+plt.xlabel("Momentum k in x ($\mathrm{\AA{}}^{-1}$)", fontsize=20)
+plt.ylabel("Momentum k in z ($\mathrm{\AA{}}^{-1}$)", fontsize=20)
+
+#plt.show()
+plt.savefig('9x6fig.png',dpi=300)
