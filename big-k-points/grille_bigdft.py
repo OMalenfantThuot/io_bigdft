@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import math as m
 import numpy as np
 import functions_briaree as fbr
+import readline
 
 # Taille de la supercellule entrée par l'utilisateur
 x = int(input("Taille de la supercellule en x:\n"))
@@ -24,6 +25,11 @@ bz = b_big_base_z / z
 
 b1k = []
 b2k = []
+
+t = fbr.TabCompleter()
+readline.set_completer_delims('\t')
+readline.parse_and_bind("tab: complete")
+readline.set_completer(t.pathCompleter)
 
 # Nom du fichier contenant les coordonnées des points k
 # À générer avec le script generate_grid.py
@@ -106,7 +112,7 @@ plt.text(
     "K",
     size="large",
 )
-# plt.legend(bbox_to_anchor=(1,1),prop={'size':20})
+plt.legend(bbox_to_anchor=(1,1),prop={'size':20})
 plt.xlabel("kx ($\mathrm{\AA{}}^{-1}$)")
 plt.ylabel("kz ($\mathrm{\AA{}}^{-1}$)")
 plt.show()
