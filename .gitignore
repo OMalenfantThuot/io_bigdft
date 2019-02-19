@@ -1,8 +1,5 @@
 *.data
 .DS_STORE
 .ipynb_checkpoints/
-*.jpg
-*.dat
 *.pyc
-*.ascii
 .idea/
