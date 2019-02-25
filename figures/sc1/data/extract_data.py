@@ -21,7 +21,9 @@ with open('out_data.txt', 'w') as out:
     total_displacement = np.sqrt(np.sum((total_pos[-1]-total_pos[0])**2, axis=1))
     displaced_atom = np.argmax(total_displacement)
 
-    for i in range(nimages):
-        displacement = np.sqrt(np.sum((total_pos[i][displaced_atom,:] - total_pos[0][displaced_atom,:])**2))
+    displacement = 0.
+    out.write('{:> 20.17E}\n'.format(displacement))
+    for i in range(nimages-1):
+        displacement += np.sqrt(np.sum((total_pos[i+1][displaced_atom,:] - total_pos[i][displaced_atom,:])**2))
         out.write('{:> 20.17E}\n'.format(displacement))
 shutil.move('out_data.txt', '../')
