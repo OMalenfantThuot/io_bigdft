@@ -63,13 +63,13 @@ imagebox2.image.axes = ax
 imagebox3.image.axes = ax
 
 ab1 = AnnotationBbox(imagebox1, [distancesN[0], reactionN[0]],
-                    xybox = [0.17 * distancesC[-1], 1.27],
+                    xybox = [0.17 * distancesN[-1], 1.27],
                     arrowprops=dict(arrowstyle = "->"))
 ab2 = AnnotationBbox(imagebox2, [distancesN[maxN], reactionN[maxN]],
-                    xybox = [0.5 * distancesC[-1], 1.27],
+                    xybox = [0.5 * distancesN[-1], 1.27],
                     arrowprops=dict(arrowstyle = "->"))
 ab3 = AnnotationBbox(imagebox3, [distancesN[-1], reactionN[-1]],
-                    xybox = [0.83 * distancesC[-1], 1.27],
+                    xybox = [0.83 * distancesN[-1], 1.27],
                     arrowprops=dict(arrowstyle = "->"))
 
 ax.add_artist(ab1)
