@@ -23,8 +23,8 @@ ax.set_ylabel('Energy (ev)',fontsize=30)
 ax.xaxis.set_ticks(np.arange(distances1[0], distances2[-1], 0.4))
 ax.tick_params(labelsize=20)
 
-ax.plot(distances1, reaction1,'-ok', clip_on=False)
-ax.plot(distances2, reaction2,'-ok', clip_on=False)
+ax.plot(distances1, reaction1,'-ok', linewidth=3, clip_on=False)
+ax.plot(distances2, reaction2,'-ok', linewidth=3, clip_on=False)
 ax.grid(True)
 ax.set_axisbelow(True)
 
@@ -80,24 +80,24 @@ imagebox4.image.axes = ax
 imagebox5.image.axes = ax
 imagebox6.image.axes = ax
 
-ab1 = AnnotationBbox(imagebox1, [distances1[0], reaction1[0]],
+ab1 = AnnotationBbox(imagebox1, [distances1[0]+0.01, reaction1[0]+0.02],
                     xybox = [0.1 * distances2[-1], 4.5],
-                    arrowprops=dict(arrowstyle = "->"))
-ab2 = AnnotationBbox(imagebox2, [distances1[max1], reaction1[max1]],
+                    arrowprops=dict(arrowstyle = "->", linewidth=3))
+ab2 = AnnotationBbox(imagebox2, [distances1[max1], reaction1[max1]+0.02],
                     xybox = [0.30 * distances2[-1], 6.5],
-                    arrowprops=dict(arrowstyle = "->"))
-ab3 = AnnotationBbox(imagebox3, [distances1[max2], reaction1[max2]],
+                    arrowprops=dict(arrowstyle = "->", linewidth=3))
+ab3 = AnnotationBbox(imagebox3, [distances1[max2], reaction1[max2]+0.02],
                     xybox = [0.5 * distances2[-1], 6.5],
-                    arrowprops=dict(arrowstyle = "->"))
-ab4 = AnnotationBbox(imagebox4, [distances1[-1], reaction1[-1]],
-                    xybox = [0.55 * distances2[-1], 1.4],
-                    arrowprops=dict(arrowstyle = "->"))
-ab5 = AnnotationBbox(imagebox5, [distances2[max3], reaction2[max3]],
-                    xybox = [0.79 * distances2[-1],2],
-                    arrowprops=dict(arrowstyle = "->"))
-ab6 = AnnotationBbox(imagebox6, [distances2[-1], reaction2[-1]],
-                    xybox = [0.98 * distances2[-1],2],
-                    arrowprops=dict(arrowstyle = "->"))
+                    arrowprops=dict(arrowstyle = "->", linewidth=3))
+ab4 = AnnotationBbox(imagebox4, [distances1[-1], reaction1[-1]-0.02],
+                    xybox = [0.60 * distances2[-1], 1.4],
+                    arrowprops=dict(arrowstyle = "->", linewidth=3))
+ab5 = AnnotationBbox(imagebox5, [distances2[max3], reaction2[max3]-0.02],
+                    xybox = [0.79 * distances2[-1],3.3],
+                    arrowprops=dict(arrowstyle = "->", linewidth=3))
+ab6 = AnnotationBbox(imagebox6, [distances2[-1], reaction2[-1]-0.02],
+                    xybox = [0.98 * distances2[-1],3.3],
+                    arrowprops=dict(arrowstyle = "->", linewidth=3))
 
 ax.add_artist(ab1)
 ax.add_artist(ab2)

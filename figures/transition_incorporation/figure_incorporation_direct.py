@@ -21,12 +21,12 @@ time = np.linspace(1.,len(reaction), len(reaction))
 
 fig,ax = plt.subplots(figsize=[16,11])
 
-ax.set_facecolor('xkcd:silver')
+ax.set_facecolor('xkcd:light grey')
 ax.plot(time, reaction,'o')
 color = ['k','r','k','r','k','r','k']
 for i in range(len(reaction)-1):
     delta = np.linspace(i+1, i+2, 100)
-    ax.plot(delta, fbr.sin_interpolate(reaction[i], reaction[i+1], delta), color=color[i])
+    ax.plot(delta, fbr.sin_interpolate(reaction[i], reaction[i+1], delta), linewidth=3, color=color[i])
 
 
 #Set axis
@@ -38,8 +38,8 @@ ax.xaxis.set_ticks_position('none')
 ax.yaxis.set_ticks_position('none')
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
-ax.set_xlabel('Time',fontsize=30)
-ax.set_ylabel('Energy',fontsize=30)
+ax.set_xlabel('Time',fontsize=35)
+ax.set_ylabel('Energy',fontsize=35)
 
 #Fig values
 xmin, xmax = ax.get_xlim()
@@ -64,15 +64,15 @@ ax.arrow(xmin, ymin, 0, ymax-ymin, fc='k', ec='k', lw = lw,
          head_width=yhw, head_length=yhl, overhang = ohg,
          length_includes_head= True, clip_on = False)
 
-xoffset = [-0.4, -0.4, -0.55, -0.4, -0.7, -0.4, -0.55, -0.4]
+xoffset = [-0.5, -0.5, -0.55, -0.5, -0.8, -0.5, -0.65, -0.5]
 yoffset = [0.1,-0.24,0.1,-0.24,0.1,-0.24,0.1,-0.24]
 texts = ['Initial state', 'Adsorbed N', 'N diffusion TS', 'Adsorbed N',
          'Functionalisation TS', 'Adsorbed C', 'C diffusion TS', 'Final state']
 
 for i,ener in enumerate(reaction):
     ax.plot([time[i] - 0.25, time[i] + 0.25], [ener, ener], 'k')
-    ax.text(time[i] + xoffset[i] , ener + yoffset[i] , texts[i], fontsize = 20)
+    ax.text(time[i] + xoffset[i] , ener + yoffset[i] , texts[i], fontsize = 25)
 
 fig.tight_layout()
-plt.savefig('reaction.png')
+plt.savefig('reaction.png', dpi=300)
 #plt.show()
