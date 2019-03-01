@@ -23,8 +23,8 @@ ax.set_ylabel('Energy (ev)',fontsize=30)
 ax.xaxis.set_ticks(np.arange(distancesN[0], distancesN[-1], 0.1))
 ax.tick_params(labelsize=20)
 
-ax.plot(distancesN, reactionN,'-o',color='g', clip_on=False)
-ax.plot(distancesC, reactionC,'-o',color='k', clip_on=False)
+ax.plot(distancesN, reactionN,'-o',color='g', linewidth=3, clip_on=False)
+ax.plot(distancesC, reactionC,'-o',color='k', linewidth=3, clip_on=False)
 ax.grid(True)
 ax.set_axisbelow(True)
 
@@ -62,15 +62,15 @@ imagebox1.image.axes = ax
 imagebox2.image.axes = ax
 imagebox3.image.axes = ax
 
-ab1 = AnnotationBbox(imagebox1, [distancesN[0], reactionN[0]],
+ab1 = AnnotationBbox(imagebox1, [distancesN[0]+0.01, reactionN[0] + 0.03],
                     xybox = [0.17 * distancesN[-1], 1.27],
-                    arrowprops=dict(arrowstyle = "->"))
-ab2 = AnnotationBbox(imagebox2, [distancesN[maxN], reactionN[maxN]],
+                    arrowprops=dict(arrowstyle='->', linewidth=3))
+ab2 = AnnotationBbox(imagebox2, [distancesN[maxN], reactionN[maxN] + 0.02],
                     xybox = [0.5 * distancesN[-1], 1.27],
-                    arrowprops=dict(arrowstyle = "->"))
-ab3 = AnnotationBbox(imagebox3, [distancesN[-1], reactionN[-1]],
+                    arrowprops=dict(arrowstyle='->', linewidth=3))
+ab3 = AnnotationBbox(imagebox3, [distancesN[-1]-0.01, reactionN[-1] + 0.03],
                     xybox = [0.83 * distancesN[-1], 1.27],
-                    arrowprops=dict(arrowstyle = "->"))
+                    arrowprops=dict(arrowstyle='->', linewidth=3))
 
 ax.add_artist(ab1)
 ax.add_artist(ab2)
