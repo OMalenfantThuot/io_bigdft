@@ -95,26 +95,38 @@ for i in range(len(final)):
 
 # Affichage du graphique
 plt.figure(1, figsize=(9, 9))
-fbr.plot_hex(b_uni, color="r", label="Primitive FBZ")
-fbr.plot_rec(bx, bz, color="g", label="BZ for 9x6 supercell (180 atoms)")
-plt.plot(pointx, pointz, "ob", markersize=3)
-plt.plot(0, 0, "kx", markersize=14)
+fbr.plot_hex(b_uni, color="#e41a1c", label="Primitive FBZ", linewidth="4")
+fbr.plot_rec(bx, bz, color="#4daf4a", label="BZ for 6x4 supercell (96 atoms)", linewidth="4")
+plt.plot(pointx, pointz, "o", color="#377eb8", markersize=8)
+plt.plot(0, 0, "kx", markersize=25)
 plt.plot(
     1 / 3 * b_uni * np.cos(np.pi / 6),
     1 / 3 * b_uni + 1 / 3 * b_uni * np.sin(np.pi / 6),
     "kx",
-    markersize=14,
+    markersize=25,
 )
-plt.text(-0.13, -0.13, "$\Gamma$", fontsize=17)
+plt.plot(
+    - 1 / 3 * b_uni * np.cos(np.pi / 6),
+    - 1 / 3 * b_uni - 1 / 3 * b_uni * np.sin(np.pi / 6),
+    "kx",
+    markersize=25,
+)
+plt.text(-0.25, -0.25, "$\Gamma$", fontsize=28)
 plt.text(
-    1 / 3 * b_uni * np.cos(np.pi / 6) - 0.15,
-    1 / 3 * b_uni + 1 / 3 * b_uni * np.sin(np.pi / 6) - 0.15,
+    1 / 3 * b_uni * np.cos(np.pi / 6) - 0.25,
+    1 / 3 * b_uni + 1 / 3 * b_uni * np.sin(np.pi / 6) - 0.25,
     "K",
-    fontsize=17,
+    fontsize=28,
+)
+plt.text(
+    - 1 / 3 * b_uni * np.cos(np.pi / 6) - 0.25,
+    - 1 / 3 * b_uni - 1 / 3 * b_uni * np.sin(np.pi / 6) - 0.25,
+    "K'",
+    fontsize=28,
 )
 plt.legend(loc='center', bbox_to_anchor=(0.5,1), prop={'size':20}, facecolor='w')
-plt.xlabel("Momentum k in x ($\mathrm{\AA{}}^{-1}$)", fontsize=20)
-plt.ylabel("Momentum k in z ($\mathrm{\AA{}}^{-1}$)", fontsize=20)
+plt.xlabel("Momentum k in x ($\mathrm{\AA{}}^{-1}$)", fontsize=25)
+plt.ylabel("Momentum k in z ($\mathrm{\AA{}}^{-1}$)", fontsize=25)
 
 #plt.show()
-plt.savefig('9x6fig.png',dpi=300)
+plt.savefig('6x4fig.png',dpi=300)
