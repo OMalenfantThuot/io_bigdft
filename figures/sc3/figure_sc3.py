@@ -59,7 +59,7 @@ ab1 = AnnotationBbox(imagebox1, [distances[0]+0.01, reaction[0]-0.02],
 ab2 = AnnotationBbox(imagebox2, [distances[6]+0.01, reaction[6]+0.01],
                     xybox = [0.48 * distances[-1], 1.45],
                     arrowprops=dict(arrowstyle = "->", linewidth=3))
-ab3 = AnnotationBbox(imagebox3, [distances[19]+0.01, reaction[19]+0.01],
+ab3 = AnnotationBbox(imagebox3, [distances[17]+0.01, reaction[17]+0.01],
                     xybox = [0.83 * distances[-1], 0.6],
                     arrowprops=dict(arrowstyle = "->", linewidth=3))
 ab4 = AnnotationBbox(imagebox4, [distances[-1]-0.01, reaction[-1]+0.02],
