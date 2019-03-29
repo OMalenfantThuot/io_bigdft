@@ -4,14 +4,11 @@ from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 import numpy as np
 from PIL import Image
 
-data1 = np.loadtxt('neb.it0005.dat')
-data2 = np.loadtxt('neb.it0004.dat')
+data = np.loadtxt('neb.it0004.dat')
 distances = np.loadtxt('out_data.txt') * 0.529177
 
 reaction = np.zeros(24)
-reaction[:5] = data1[:5,1]
-reaction[5:18] = data2[:,1]+data1[5,1]
-reaction[18:24] = data1[11:,1]
+reaction = data[:,1]
 
 fig,ax = plt.subplots(figsize=[14,11])
 
@@ -29,7 +26,7 @@ ax.grid(True)
 ax.set_axisbelow(True)
 
 min_i = 5
-max_i = 11
+max_i = 14
 h = (reaction[min_i]+reaction[max_i])/2
 
 ax.plot([distances[min_i], distances[max_i]], [reaction[min_i], reaction[min_i]], '--k')
@@ -81,4 +78,4 @@ ax.add_artist(ab4)
 
 #Show or save figure
 #plt.show()
-plt.savefig('scenario_1', dpi = 250)
+plt.savefig('scenario_1', dpi = 200)
