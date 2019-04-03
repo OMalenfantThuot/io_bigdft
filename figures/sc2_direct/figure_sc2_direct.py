@@ -4,7 +4,7 @@ from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 import numpy as np
 from PIL import Image
 
-data1 = np.loadtxt("neb.it0006.dat")
+data1 = np.loadtxt("neb.it0005.dat")
 data2 = np.loadtxt("neb.it0007.dat")
 distances1 = np.loadtxt("out_data1.txt") * 0.529177
 distances2 = np.loadtxt("out_data2.txt") * 0.529177 + distances1[-1]
@@ -143,5 +143,5 @@ ax.add_artist(ab3)
 ax.add_artist(ab5)
 
 # Show or save figure
-#plt.show()
-plt.savefig("sc2_direct", dpi=200)
+plt.show()
+#plt.savefig("sc2_direct", dpi=200)
