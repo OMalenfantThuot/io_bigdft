@@ -190,9 +190,9 @@ ax.add_artist(ab1)
 ax.add_artist(ab2)
 ax.add_artist(ab3)
 ax.add_artist(ab4)
-ax.add_artist(ab5)
-ax.add_artist(ab6)
+#ax.add_artist(ab5)
+#ax.add_artist(ab6)
 
 # Show or save figure
-#plt.show()
-plt.savefig('stonewales', dpi = 200)
+plt.show()
+#plt.savefig('stonewales', dpi = 200)
