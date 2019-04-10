@@ -27,19 +27,20 @@ ax.plot(distances1, reaction1, "-ok", linewidth=4, clip_on=False, markersize=8)
 ax.plot(distances2, reaction2, "-ok", linewidth=4, clip_on=False, markersize=8)
 ax.grid(True)
 ax.set_axisbelow(True)
+plt.subplots_adjust(top=0.79)
 
 max1 = np.argmax(reaction1[:10])
 min1 = 9
 max2 = np.argmax(reaction1)
-min2 = 16
+min2 = np.argmin(reaction2)
 max3 = np.argmax(reaction2)
 
 h1 = (reaction1[max2] - reaction1[min1]) / 2 + reaction1[min1]
-h2 = (reaction2[max3] - reaction2[0]) / 2 + reaction2[0]
+h2 = (reaction2[max3] - reaction2[min2]) / 2 + reaction2[min2]
 
 ax.plot([distances1[0], distances1[max1]], [reaction1[max1], reaction1[max1]], "--k", linewidth=3)
 ax.plot([distances1[min1], distances1[max2]], [reaction1[min1], reaction1[min1]], "--k", linewidth=3)
-ax.plot([distances2[0], distances2[max3]], [reaction2[0], reaction2[0]], "--k")
+ax.plot([distances2[min2], distances2[max3]], [reaction2[min2], reaction2[min2]], "--k")
 ax.arrow(
     distances1[max1],
     reaction1[max1] / 2,
@@ -108,27 +109,27 @@ ax.arrow(
 )
 
 ax.text(
-    distances1[max1] - 0.52,
+    distances1[max1] - 0.55,
     reaction1[max1] / 2.1,
     "{:4.2f} eV".format(reaction1[max1]),
     fontsize=25,
 )
 ax.text(
-    distances1[max2] + 0.05,
-    h1,
+    distances1[max2] - 0.2,
+    distances1[min1] - 0.1,
     "{:4.2f} eV".format(reaction1[max2] - reaction1[min1]),
     fontsize=25,
 )
 ax.text(
-    distances2[max3] + 0.06,
-    h2,
-    "{:4.2f} eV".format(reaction2[max3] - reaction2[0]),
+    distances2[max3] - 0.55,
+    h2-0.2,
+    "{:4.2f} eV".format(reaction2[max3] - reaction2[min2]),
     fontsize=25,
 )
 
 image1 = Image.open("posinp1.jpg")
 image2 = Image.open("posinp8.jpg")
-image3 = Image.open("posinp14.jpg")
+#image3 = Image.open("posinp14.jpg")
 image4 = Image.open("posinp17.jpg")
 image5 = Image.open("posinp27.jpg")
 image6 = Image.open("posinp32.jpg")
@@ -137,14 +138,14 @@ zoom = 0.19
 zoom2 = 0.22
 imagebox1 = OffsetImage(image1, zoom=zoom)
 imagebox2 = OffsetImage(image2, zoom=zoom)
-imagebox3 = OffsetImage(image3, zoom=zoom)
+#imagebox3 = OffsetImage(image3, zoom=zoom)
 imagebox4 = OffsetImage(image4, zoom=zoom)
 imagebox5 = OffsetImage(image5, zoom=zoom2)
 imagebox6 = OffsetImage(image6, zoom=zoom2)
 
 imagebox1.image.axes = ax
 imagebox2.image.axes = ax
-imagebox3.image.axes = ax
+#imagebox3.image.axes = ax
 imagebox4.image.axes = ax
 imagebox5.image.axes = ax
 imagebox6.image.axes = ax
@@ -158,19 +159,19 @@ ab1 = AnnotationBbox(
 ab2 = AnnotationBbox(
     imagebox2,
     [distances1[max1], reaction1[max1] + 0.02],
-    xybox=[0.30 * distances2[-1], 6.5],
+    xybox=[0.30 * distances2[-1], 6.2],
     arrowprops=dict(arrowstyle="->", linewidth=4),
 )
-ab3 = AnnotationBbox(
-    imagebox3,
-    [distances1[max2], reaction1[max2] + 0.02],
-    xybox=[0.5 * distances2[-1], 6.5],
-    arrowprops=dict(arrowstyle="->", linewidth=4),
-)
+#ab3 = AnnotationBbox(
+#    imagebox3,
+#    [distances1[max2], reaction1[max2] + 0.02],
+#    xybox=[0.5 * distances2[-1], 6.1],
+#    arrowprops=dict(arrowstyle="->", linewidth=4),
+#)
 ab4 = AnnotationBbox(
     imagebox4,
     [distances1[-1], reaction1[-1] - 0.02],
-    xybox=[0.60 * distances2[-1], 1.4],
+    xybox=[0.54 * distances2[-1], 6.2],
     arrowprops=dict(arrowstyle="->", linewidth=4),
 )
 ab5 = AnnotationBbox(
@@ -188,11 +189,11 @@ ab6 = AnnotationBbox(
 
 ax.add_artist(ab1)
 ax.add_artist(ab2)
-ax.add_artist(ab3)
-#ax.add_artist(ab4)
+#ax.add_artist(ab3)
+ax.add_artist(ab4)
 #ax.add_artist(ab5)
 #ax.add_artist(ab6)
 
 # Show or save figure
-plt.show()
-#plt.savefig('stonewales', dpi = 200)
+#plt.show()
+plt.savefig('stonewales', dpi = 200)
