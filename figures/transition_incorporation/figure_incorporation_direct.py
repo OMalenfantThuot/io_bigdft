@@ -110,7 +110,7 @@ texts = [
     "Bridge N",
     "Functionalisation\nTransition State",
     "Bridge C",
-    "C diffusion\nTransition State",
+    "C Diffusion\nTransition State",
     "Final State",
 ]
 
