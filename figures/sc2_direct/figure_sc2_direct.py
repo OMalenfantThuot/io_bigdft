@@ -17,7 +17,7 @@ fig, ax = plt.subplots(figsize=[23, 10])
 # Set axis
 ax.set_xlim(distances1[0], distances2[-1])
 ax.set_ylim(0, np.max(reaction1) + 0.6)
-ax.set_xlabel("Nitrogen Displacement($\AA$)", fontsize=30)
+ax.set_xlabel("Atomic Displacement($\AA$)", fontsize=30)
 ax.set_ylabel("Energy (ev)", fontsize=30)
 
 ax.xaxis.set_ticks(np.arange(distances1[0], distances2[-1], 0.3))
@@ -36,8 +36,18 @@ max2 = np.argmax(reaction2)
 
 h = (reaction2[0] + reaction2[max2]) / 2
 
-ax.plot([distances1[0], distances1[max1]], [reaction1[max1], reaction1[max1]], "--k", linewidth=3)
-ax.plot([distances1[-2], distances2[max2]], [reaction1[-2], reaction1[-1]], "--k", linewidth=3)
+ax.plot(
+    [distances1[0], distances1[max1]],
+    [reaction1[max1], reaction1[max1]],
+    "--k",
+    linewidth=3,
+)
+ax.plot(
+    [distances1[-2], distances2[max2]],
+    [reaction1[-2], reaction1[-1]],
+    "--k",
+    linewidth=3,
+)
 ax.arrow(
     distances1[max1],
     reaction1[max1] / 2,
@@ -99,17 +109,20 @@ ax.text(
 image1 = Image.open("posinp1.jpg")
 image2 = Image.open("posinp10.jpg")
 image3 = Image.open("posinp17.jpg")
-image5 = Image.open("posinp33.jpg")
+image4 = Image.open("posinp24.jpg")
+image5 = Image.open("posinp32.jpg")
 
-zoom = 0.3
+zoom, zoom2 = 0.33, 0.27
 imagebox1 = OffsetImage(image1, zoom=zoom)
 imagebox2 = OffsetImage(image2, zoom=zoom)
 imagebox3 = OffsetImage(image3, zoom=zoom)
-imagebox5 = OffsetImage(image5, zoom=zoom)
+imagebox4 = OffsetImage(image4, zoom=zoom2)
+imagebox5 = OffsetImage(image5, zoom=zoom2)
 
 imagebox1.image.axes = ax
 imagebox2.image.axes = ax
 imagebox3.image.axes = ax
+imagebox4.image.axes = ax
 imagebox5.image.axes = ax
 
 ab1 = AnnotationBbox(
@@ -121,7 +134,7 @@ ab1 = AnnotationBbox(
 ab2 = AnnotationBbox(
     imagebox2,
     [distances1[max1] - 0.02, reaction1[max1] + 0.02],
-    xybox=[0.18 * distances2[-1], 5],
+    xybox=[0.18 * distances2[-1], 4.8],
     arrowprops=dict(arrowstyle="->", linewidth=4),
 )
 ab3 = AnnotationBbox(
@@ -130,18 +143,25 @@ ab3 = AnnotationBbox(
     xybox=[0.68 * distances2[-1], 1.2],
     arrowprops=dict(arrowstyle="->", linewidth=4),
 )
+ab4 = AnnotationBbox(
+    imagebox4,
+    [distances2[max2] - 0.01, reaction2[max2] + 0.02],
+    xybox=[0.58 * distances2[-1], 4.8],
+    arrowprops=dict(arrowstyle="->", linewidth=4),
+)
 ab5 = AnnotationBbox(
     imagebox5,
     [distances2[-1] - 0.007, reaction2[-1] + 0.02],
-    xybox=[0.92 * distances2[-1], 5],
+    xybox=[0.9 * distances2[-1], 4.8],
     arrowprops=dict(arrowstyle="->", linewidth=4),
 )
 
 ax.add_artist(ab1)
 ax.add_artist(ab2)
 ax.add_artist(ab3)
+ax.add_artist(ab4)
 ax.add_artist(ab5)
 
 # Show or save figure
-#plt.show()
+# plt.show()
 plt.savefig("sc2_direct", dpi=200)
