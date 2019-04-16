@@ -17,7 +17,7 @@ fig, ax = plt.subplots(figsize=[23, 10])
 # Set axis
 ax.set_xlim(distances1[0], distances2[-1])
 ax.set_ylim(0, np.max(reaction2) + 0.6)
-ax.set_xlabel("Nitrogen Displacement($\AA$)", fontsize=30)
+ax.set_xlabel("Atomic Displacement($\AA$)", fontsize=30)
 ax.set_ylabel("Energy (ev)", fontsize=30)
 
 ax.xaxis.set_ticks(np.arange(distances1[0], distances2[-1], 0.4))
@@ -38,8 +38,18 @@ max3 = np.argmax(reaction2)
 h1 = (reaction1[max2] - reaction1[min1]) / 2 + reaction1[min1]
 h2 = (reaction2[max3] - reaction2[min2]) / 2 + reaction2[min2]
 
-ax.plot([distances1[0], distances1[max1]], [reaction1[max1], reaction1[max1]], "--k", linewidth=3)
-ax.plot([distances1[min1], distances1[max2]], [reaction1[min1], reaction1[min1]], "--k", linewidth=3)
+ax.plot(
+    [distances1[0], distances1[max1]],
+    [reaction1[max1], reaction1[max1]],
+    "--k",
+    linewidth=3,
+)
+ax.plot(
+    [distances1[min1], distances1[max2]],
+    [reaction1[min1], reaction1[min1]],
+    "--k",
+    linewidth=3,
+)
 ax.plot([distances2[min2], distances2[max3]], [reaction2[min2], reaction2[min2]], "--k")
 ax.arrow(
     distances1[max1],
@@ -115,37 +125,37 @@ ax.text(
     fontsize=25,
 )
 ax.text(
-    distances1[max2] - 0.2,
-    distances1[min1] - 0.1,
+    distances1[max2] + 0.05,
+    (reaction1[max2] + reaction1[min1]) / 2 - 0.2,
     "{:4.2f} eV".format(reaction1[max2] - reaction1[min1]),
     fontsize=25,
 )
 ax.text(
     distances2[max3] - 0.55,
-    h2-0.2,
+    h2 - 0.2,
     "{:4.2f} eV".format(reaction2[max3] - reaction2[min2]),
     fontsize=25,
 )
 
 image1 = Image.open("posinp1.jpg")
 image2 = Image.open("posinp8.jpg")
-#image3 = Image.open("posinp14.jpg")
-image4 = Image.open("posinp17.jpg")
-image5 = Image.open("posinp27.jpg")
-image6 = Image.open("posinp32.jpg")
+image3 = Image.open("posinp17.jpg")
+image4 = Image.open("posinp24.jpg")
+image5 = Image.open("posinp30.jpg")
+image6 = Image.open("posinp36.jpg")
 
-zoom = 0.19
-zoom2 = 0.22
+zoom, zoom2 = 0.215, 0.275
+
 imagebox1 = OffsetImage(image1, zoom=zoom)
 imagebox2 = OffsetImage(image2, zoom=zoom)
-#imagebox3 = OffsetImage(image3, zoom=zoom)
-imagebox4 = OffsetImage(image4, zoom=zoom)
+imagebox3 = OffsetImage(image3, zoom=zoom)
+imagebox4 = OffsetImage(image4, zoom=zoom2)
 imagebox5 = OffsetImage(image5, zoom=zoom2)
 imagebox6 = OffsetImage(image6, zoom=zoom2)
 
 imagebox1.image.axes = ax
 imagebox2.image.axes = ax
-#imagebox3.image.axes = ax
+imagebox3.image.axes = ax
 imagebox4.image.axes = ax
 imagebox5.image.axes = ax
 imagebox6.image.axes = ax
@@ -162,38 +172,38 @@ ab2 = AnnotationBbox(
     xybox=[0.30 * distances2[-1], 6.2],
     arrowprops=dict(arrowstyle="->", linewidth=4),
 )
-#ab3 = AnnotationBbox(
-#    imagebox3,
-#    [distances1[max2], reaction1[max2] + 0.02],
-#    xybox=[0.5 * distances2[-1], 6.1],
-#    arrowprops=dict(arrowstyle="->", linewidth=4),
-#)
+ab3 = AnnotationBbox(
+    imagebox3,
+    [distances1[-1], reaction1[-1] + 0.02],
+    xybox=[0.54 * distances2[-1], 6.2],
+    arrowprops=dict(arrowstyle="->", linewidth=4),
+)
 ab4 = AnnotationBbox(
     imagebox4,
-    [distances1[-1], reaction1[-1] - 0.02],
-    xybox=[0.54 * distances2[-1], 6.2],
+    [distances2[min2] - 0.01, reaction2[min2]],
+    xybox=[0.54 * distances2[-1], 1.4],
     arrowprops=dict(arrowstyle="->", linewidth=4),
 )
 ab5 = AnnotationBbox(
     imagebox5,
-    [distances2[max3], reaction2[max3] - 0.02],
-    xybox=[0.79 * distances2[-1], 3.3],
+    [distances2[max3] - 0.02, reaction2[max3] + 0.03],
+    xybox=[0.76 * distances2[-1], 6.2],
     arrowprops=dict(arrowstyle="->", linewidth=4),
 )
 ab6 = AnnotationBbox(
     imagebox6,
-    [distances2[-1], reaction2[-1] - 0.02],
-    xybox=[0.98 * distances2[-1], 3.3],
+    [distances2[-1], reaction2[-1] + 0.03],
+    xybox=[1.0 * distances2[-1], 6.2],
     arrowprops=dict(arrowstyle="->", linewidth=4),
 )
 
 ax.add_artist(ab1)
 ax.add_artist(ab2)
-#ax.add_artist(ab3)
+ax.add_artist(ab3)
 ax.add_artist(ab4)
-#ax.add_artist(ab5)
-#ax.add_artist(ab6)
+ax.add_artist(ab5)
+ax.add_artist(ab6)
 
 # Show or save figure
-#plt.show()
-plt.savefig('stonewales', dpi = 200)
+# plt.show()
+plt.savefig("stonewales", dpi=200)
