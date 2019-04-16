@@ -28,7 +28,7 @@ ax.plot(distances2, reaction2, "-ok", linewidth=4, clip_on=False, markersize=8)
 ax.grid(True)
 ax.set_axisbelow(True)
 
-plt.subplots_adjust(top=0.78)
+plt.subplots_adjust(top=0.83)
 
 max1 = np.argmax(reaction1)
 min1 = 3
@@ -37,7 +37,7 @@ max2 = np.argmax(reaction2)
 h = (reaction2[0] + reaction2[max2]) / 2
 
 ax.plot([distances1[0], distances1[max1]], [reaction1[max1], reaction1[max1]], "--k", linewidth=3)
-ax.plot([distances1[-1], distances2[max2]], [reaction1[-1], reaction1[-1]], "--k", linewidth=3)
+ax.plot([distances1[-2], distances2[max2]], [reaction1[-2], reaction1[-1]], "--k", linewidth=3)
 ax.arrow(
     distances1[max1],
     reaction1[max1] / 2,
@@ -90,9 +90,9 @@ ax.text(
     fontsize=25,
 )
 ax.text(
-    distances2[max2] - 0.08,
+    distances2[max2] - 0.12,
     reaction2[0] - 0.25,
-    "{:4.2f} eV".format(reaction2[max2] - reaction2[0]),
+    "{:4.2f} eV".format(reaction2[max2] - reaction1[-2]),
     fontsize=25,
 )
 
@@ -115,25 +115,25 @@ imagebox5.image.axes = ax
 ab1 = AnnotationBbox(
     imagebox1,
     [distances1[0] + 0.01, reaction1[0] + 0.02],
-    xybox=[0.14 * distances2[-1], 5.4],
+    xybox=[0.12 * distances2[-1], 2.5],
     arrowprops=dict(arrowstyle="->", linewidth=4),
 )
 ab2 = AnnotationBbox(
     imagebox2,
-    [distances1[max1] + 0.02, reaction1[max1] + 0.01],
-    xybox=[0.48 * distances2[-1], 5.4],
+    [distances1[max1] - 0.02, reaction1[max1] + 0.02],
+    xybox=[0.18 * distances2[-1], 5],
     arrowprops=dict(arrowstyle="->", linewidth=4),
 )
 ab3 = AnnotationBbox(
     imagebox3,
-    [distances1[-1] + 0.02, reaction1[-1] + 0.03],
-    xybox=[0.80 * distances2[-1], 5.4],
+    [distances1[-2] + 0.01, reaction1[-2] - 0.02],
+    xybox=[0.68 * distances2[-1], 1.2],
     arrowprops=dict(arrowstyle="->", linewidth=4),
 )
 ab5 = AnnotationBbox(
     imagebox5,
-    [distances2[-1] - 0.02, reaction2[-1] - 0.02],
-    xybox=[0.80 * distances2[-1], 1.2],
+    [distances2[-1] - 0.007, reaction2[-1] + 0.02],
+    xybox=[0.92 * distances2[-1], 5],
     arrowprops=dict(arrowstyle="->", linewidth=4),
 )
 
@@ -143,5 +143,5 @@ ax.add_artist(ab3)
 ax.add_artist(ab5)
 
 # Show or save figure
-plt.show()
-#plt.savefig("sc2_direct", dpi=200)
+#plt.show()
+plt.savefig("sc2_direct", dpi=200)
