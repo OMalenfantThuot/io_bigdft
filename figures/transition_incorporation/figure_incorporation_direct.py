@@ -107,7 +107,7 @@ texts = [
     "Initial State",
     "Bridge N",
     "N Diffusion\nTransition State",
-    "Adsorbed N",
+    "Bridge N",
     "Functionalisation\nTransition State",
     "Bridge C",
     "C diffusion\nTransition State",
