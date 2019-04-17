@@ -43,8 +43,8 @@ ax.plot(
     linewidth=3,
 )
 ax.plot(
-    [distances1[-2], distances2[max2]],
-    [reaction1[-2], reaction1[-1]],
+    [distances1[-1], distances2[max2]],
+    [reaction1[-1], reaction1[-1]],
     "--k",
     linewidth=3,
 )
@@ -102,7 +102,7 @@ ax.text(
 ax.text(
     distances2[max2] - 0.12,
     reaction2[0] - 0.25,
-    "{:4.2f} eV".format(reaction2[max2] - reaction1[-2]),
+    "{:4.2f} eV".format(reaction2[max2] - reaction1[-1]),
     fontsize=25,
 )
 
@@ -139,7 +139,7 @@ ab2 = AnnotationBbox(
 )
 ab3 = AnnotationBbox(
     imagebox3,
-    [distances1[-2] + 0.01, reaction1[-2] - 0.02],
+    [distances1[-1] + 0.01, reaction1[-1] - 0.02],
     xybox=[0.68 * distances2[-1], 1.2],
     arrowprops=dict(arrowstyle="->", linewidth=4),
 )
