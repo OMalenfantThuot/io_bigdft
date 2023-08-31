@@ -110,4 +110,4 @@ ax.add_artist(ab4)
 
 # Show or save figure
 #plt.show()
-plt.savefig("scenario_1", dpi=200)
+plt.savefig("scenario_1.eps")

@@ -132,5 +132,5 @@ ab = AnnotationBbox(
 ax.add_artist(ab)
 
 fig.tight_layout()
-plt.savefig('reaction.png', dpi=200)
+plt.savefig('reaction.eps')
 #plt.show()

@@ -162,4 +162,4 @@ ax.add_artist(ab5)
 
 # Show or save figure
 # plt.show()
-plt.savefig("sc2_inverse", dpi=200)
+plt.savefig("sc2_inverse.eps")

@@ -206,4 +206,4 @@ ax.add_artist(ab6)
 
 # Show or save figure
 # plt.show()
-plt.savefig("stonewales", dpi=200)
+plt.savefig("stonewales.eps")

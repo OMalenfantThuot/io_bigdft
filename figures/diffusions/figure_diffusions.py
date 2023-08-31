@@ -149,4 +149,4 @@ ax.add_artist(ab3)
 
 # Show or save figure
 # plt.show()
-plt.savefig("diffusions", dpi=200)
+plt.savefig("diffusions.eps")

@@ -164,4 +164,4 @@ ax.add_artist(ab5)
 
 # Show or save figure
 # plt.show()
-plt.savefig("sc2_direct", dpi=200)
+plt.savefig("sc2_direct.eps")
